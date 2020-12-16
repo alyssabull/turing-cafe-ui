@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Reservations from '../Reservations/Reservations.js';
 import Form from '../Form/Form.js';
-import { fetchAllReservations, postNewReservation } from '../apiCalls.js';
+import { fetchAllReservations, postNewReservation, deleteReservation } from '../apiCalls.js';
 import './App.css';
 
 class App extends Component {
@@ -17,8 +17,11 @@ class App extends Component {
   }
 
   addNewReservation = (reservationInfo) => {
-
     postNewReservation(reservationInfo).then(updatedReservations => this.setState({reservations: [...this.state.reservations, updatedReservations]})).catch(err => err)
+  }
+
+  deleteCard = (id) => {
+    deleteReservation(id).then(deletedResy => this.componentDidMount()).catch(err => err)
   }
 
   render() {
@@ -31,6 +34,7 @@ class App extends Component {
         <div className='resy-container'>
           <Reservations
             reservations={this.state.reservations}
+            deleteCard={this.deleteCard}
           />
         </div>
       </div>
