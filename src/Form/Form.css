@@ -1,0 +1,13 @@
+input {
+  margin: 0em 2em 2em 0em;
+  height: 2em;
+  width: 15em;
+}
+
+button {
+  padding: 0.4em;
+}
+
+button:hover {
+  cursor: pointer;
+}
