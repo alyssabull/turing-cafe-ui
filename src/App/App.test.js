@@ -39,7 +39,6 @@ describe('App', () => {
     const numberInput = screen.getByPlaceholderText('Number of Guests')
     const submitButton = screen.getByText('SUBMIT RESERVATION')
 
-
     fireEvent.change(nameInput, {target: { value: mockNewResy.name }})
     fireEvent.change(dateInput, {target: { value: mockNewResy.date }})
     fireEvent.change(timeInput, {target: { value: mockNewResy.time }})

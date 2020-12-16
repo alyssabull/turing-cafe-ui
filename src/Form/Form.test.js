@@ -49,4 +49,26 @@ describe('Form', () => {
     expect(timeInput.value).toBe('6:00')
     expect(numberInput.value).toBe('2')
   })
+
+  it('should be call addNewReservation with correct params', () => {
+    const mockResy = {
+      name: 'Gordon',
+      date: '2/14',
+      time: '7:30',
+      number: '2'
+    }
+
+    const nameInput = screen.getByPlaceholderText('Name');
+    const dateInput = screen.getByPlaceholderText('Date (mm/dd)')
+    const timeInput = screen.getByPlaceholderText('Time --:--')
+    const numberInput = screen.getByPlaceholderText('Number of Guests')
+
+    fireEvent.change(nameInput, {target: { value: mockResy.name }})
+    fireEvent.change(dateInput, {target: { value: mockResy.date }})
+    fireEvent.change(timeInput, {target: { value: mockResy.time }})
+    fireEvent.change(numberInput, {target: { value: mockResy.number }})
+    fireEvent.click(screen.getByText('SUBMIT RESERVATION'))
+
+    expect(mockAddNewReservation).toHaveBeenCalledWith(mockResy)
+  })
 })
