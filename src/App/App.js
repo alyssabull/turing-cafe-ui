@@ -1,7 +1,20 @@
 import React, { Component } from 'react';
+import Reservations from '../Reservations/Reservations.js';
+import { fetchAllReservations } from '../apiCalls.js';
 import './App.css';
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      reservations: []
+    }
+  }
+
+  componentDidMount() {
+    fetchAllReservations().then(allReservations => console.log(allReservations)).catch(err => err.message)
+  }
+
   render() {
     return (
       <div className="App">
@@ -10,7 +23,7 @@ class App extends Component {
 
         </div>
         <div className='resy-container'>
-          
+        
         </div>
       </div>
     )
