@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Reservations from '../Reservations/Reservations.js';
 import Form from '../Form/Form.js';
-import { fetchAllReservations } from '../apiCalls.js';
+import { fetchAllReservations, postNewReservation } from '../apiCalls.js';
 import './App.css';
 
 class App extends Component {
@@ -18,7 +18,7 @@ class App extends Component {
 
   addNewReservation = (reservationInfo) => {
 
-    this.setState({ reservations: [...this.state.reservations, reservationInfo]})
+    postNewReservation(reservationInfo).then(updatedReservations => this.setState({reservations: [...this.state.reservations, updatedReservations]})).catch(err => err)
   }
 
   render() {
