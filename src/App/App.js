@@ -16,12 +16,17 @@ class App extends Component {
     fetchAllReservations().then(allReservations => this.setState({reservations: allReservations })).catch(err => err.message)
   }
 
+  addNewReservation = (reservationInfo) => {
+
+    this.setState({ reservations: [...this.state.reservations, reservationInfo]})
+  }
+
   render() {
     return (
       <div className="App">
         <h1 className='app-title'>Turing Cafe Reservations</h1>
         <div className='resy-form'>
-          <Form />
+          <Form addNewReservation={this.addNewReservation}/>
         </div>
         <div className='resy-container'>
           <Reservations
