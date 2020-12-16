@@ -21,5 +21,11 @@ describe('Form', () => {
     const timeInput = screen.getByPlaceholderText('Time --:--')
     const numberInput = screen.getByPlaceholderText('Number of Guests')
     const submitButton = screen.getByText('SUBMIT RESERVATION')
+
+    expect(nameInput).toBeInTheDocument()
+    expect(dateInput).toBeInTheDocument()
+    expect(timeInput).toBeInTheDocument()
+    expect(numberInput).toBeInTheDocument()
+    expect(submitButton).toBeInTheDocument()
   })
 })
