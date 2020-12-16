@@ -12,7 +12,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetchAllReservations().then(allReservations => console.log(allReservations)).catch(err => err.message)
+    fetchAllReservations().then(allReservations => this.setState({reservations: allReservations })).catch(err => err.message)
   }
 
   render() {
@@ -23,7 +23,9 @@ class App extends Component {
 
         </div>
         <div className='resy-container'>
-        
+          <Reservations
+            reservations={this.state.reservations}
+          />
         </div>
       </div>
     )
