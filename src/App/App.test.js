@@ -3,13 +3,14 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom';
 import App from './App.js';
-import { fetchAllReservations, postNewReservation } from '../apiCalls.js';
+import { fetchAllReservations, postNewReservation, deleteReservation } from '../apiCalls.js';
 jest.mock('../apiCalls.js')
 
 describe('App', () => {
+  let mockResy;
 
   beforeEach(() => {
-    const mockResy = [{
+    mockResy = [{
       id: 1,
       name: 'John',
       date: '12/30',
@@ -20,6 +21,22 @@ describe('App', () => {
     fetchAllReservations.mockResolvedValueOnce(mockResy);
 
     render(<App />)
+  })
+
+  it('should render correctly', () => {
+    const header = screen.getByText('Turing Cafe Reservations')
+    const nameInput = screen.getByPlaceholderText('Name')
+    const dateInput = screen.getByPlaceholderText('Date (mm/dd)')
+    const timeInput = screen.getByPlaceholderText('Time --:--')
+    const numberInput = screen.getByPlaceholderText('Number of Guests')
+    const submitButton = screen.getByText('SUBMIT RESERVATION')
+
+    expect(header).toBeInTheDocument()
+    expect(nameInput).toBeInTheDocument()
+    expect(dateInput).toBeInTheDocument()
+    expect(timeInput).toBeInTheDocument()
+    expect(numberInput).toBeInTheDocument()
+    expect(submitButton).toBeInTheDocument()
   })
 
   it('should be able to post a new Reservation', async () => {

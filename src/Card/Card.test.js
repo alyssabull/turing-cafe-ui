@@ -5,6 +5,8 @@ import '@testing-library/jest-dom';
 import Card from './Card.js';
 
 describe('Card', () => {
+  const mockDeleteCard = jest.fn()
+
   beforeEach(() => {
     const mockCard = {
       id: 1,
@@ -20,6 +22,7 @@ describe('Card', () => {
         date={mockCard.date}
         time={mockCard.time}
         number={mockCard.number}
+        deleteCard={mockDeleteCard}
         key={mockCard.id}
       />)
   })
@@ -34,5 +37,13 @@ describe('Card', () => {
     expect(cardDate).toBeInTheDocument()
     expect(cardTime).toBeInTheDocument()
     expect(cardNumber).toBeInTheDocument()
+  })
+
+  it('should call deleteCard with the correct params', () => {
+    const cancelButton = screen.getByText('CANCEL')
+
+    fireEvent.click(cancelButton)
+
+    expect(mockDeleteCard).toHaveBeenCalledWith(1)
   })
 })
