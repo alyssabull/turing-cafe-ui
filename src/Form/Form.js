@@ -17,10 +17,15 @@ class Form extends Component {
 
   submitReservation = (event) => {
     event.preventDefault()
-    const newResy = {...this.state}
+    if (this.state.name !== '' && this.state.date !== '' && this.state.time !== '' && this.state.number !== '') {
+      const newResy = {...this.state}
 
-    this.props.addNewReservation(newResy)
-    this.clearInputs()
+      this.props.addNewReservation(newResy)
+      this.clearInputs()
+    } else {
+      alert('Please fill out all input fields!')
+    }
+
   }
 
   clearInputs = () => {
