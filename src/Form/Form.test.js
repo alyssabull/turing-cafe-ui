@@ -28,4 +28,25 @@ describe('Form', () => {
     expect(numberInput).toBeInTheDocument()
     expect(submitButton).toBeInTheDocument()
   })
+
+  it('should update the forms value as a user types', () => {
+    const nameInput = screen.getByPlaceholderText('Name');
+    const dateInput = screen.getByPlaceholderText('Date (mm/dd)')
+    const timeInput = screen.getByPlaceholderText('Time --:--')
+    const numberInput = screen.getByPlaceholderText('Number of Guests')
+    const userNameInput = 'Alyssa'
+    const userDateInput = '12/25'
+    const userTimeInput = '6:00'
+    const userNumberInput = '2'
+
+    fireEvent.change(nameInput, {target: { value: userNameInput }})
+    fireEvent.change(dateInput, {target: { value: userDateInput }})
+    fireEvent.change(timeInput, {target: { value: userTimeInput }})
+    fireEvent.change(numberInput, {target: { value: userNumberInput }})
+
+    expect(nameInput.value).toBe('Alyssa')
+    expect(dateInput.value).toBe('12/25')
+    expect(timeInput.value).toBe('6:00')
+    expect(numberInput.value).toBe('2')
+  })
 })
